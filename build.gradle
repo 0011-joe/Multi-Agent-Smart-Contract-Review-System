@@ -1,0 +1,64 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.5'
+    id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.contract'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+    maven { url 'https://maven.aliyun.com/repository/public' }
+}
+
+dependencies {
+    // Spring Boot
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // Spring AI
+    implementation 'org.springframework.ai:spring-ai-starter:1.0.0-M4'
+    implementation 'org.springframework.ai:spring-ai-mcp-server-spring-boot-starter:1.0.0-M4'
+    implementation 'org.springframework.ai:spring-ai-mcp-client-spring-boot-starter:1.0.0-M4'
+    implementation 'org.springframework.ai:spring-ai-chroma-store:1.0.0-M4'
+
+    // Database
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+
+    // Document Parsing
+    implementation 'org.apache.pdfbox:pdfbox:3.0.3'
+    implementation 'org.apache.poi:poi-ooxml:5.3.0'
+
+    // JSON
+    implementation 'com.alibaba.fastjson2:fastjson2:2.0.54'
+
+    // Lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // Swagger
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0'
+
+    // Test
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
