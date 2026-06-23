@@ -1,0 +1,41 @@
+# Java
+*.class
+*.jar
+*.war
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+build/
+dist/
+
+# Logs
+logs/
+*.log
+
+# Uploads
+uploads/
+data/
+
+# Temp
+temp/
+*.tmp
+
+# Environment
+.env
+*.env.local
+
+# Spring Boot
+application-local.yml
+application-dev.yml
