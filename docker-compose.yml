@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - ZHIPU_API_KEY=${ZHIPU_API_KEY}
+      - SPRING_PROFILES_ACTIVE=prod
+      - NACOS_ADDR=nacos:8848
+      - CHROMADB_HOST=chromadb
+      - CHROMADB_PORT=8000
+    depends_on:
+      - chromadb
+      - nacos
+    restart: unless-stopped
+
+  chromadb:
+    image: chromadb/chroma:0.5.0
+    ports:
+      - "8000:8000"
+    volumes:
+      - chromadb-data:/chroma/chroma
+    environment:
+      - IS_PERSISTENT=TRUE
+    restart: unless-stopped
+
+  nacos:
+    image: nacos/nacos-server:v2.3.2
+    ports:
+      - "8848:8848"
+    environment:
+      - MODE=standalone
+    restart: unless-stopped
+
+volumes:
+  chromadb-data:
